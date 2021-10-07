@@ -58,7 +58,16 @@ addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------------------*/
 // Your solution for 02-addTwoNumbers here:
 
+function addTwoNumbers(num1, num2) {
+  //return the sum of the two numbers
+  //return nan if either is not a number
+  if (typeof num1 !== 'number' || typeof num2 !== 'number') {
+    return NaN
+  } else {
+    return num1 + num2
+  }
 
+}
 
 
 
