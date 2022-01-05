@@ -1,37 +1,37 @@
-/*-----------------------------------------------------------------------------
-Challenge: 00-sayHello (example)
+// /*-----------------------------------------------------------------------------
+// Challenge: 00-sayHello (example)
 
-Difficulty: Basic
+// Difficulty: Basic
 
-Prompt:
+// Prompt:
 
-Write a function called sayHello that returns the string "Hello!".
+// Write a function called sayHello that returns the string "Hello!".
 
-Examples:
+// Examples:
 
-sayHello() //=> Hello!
------------------------------------------------------------------------------*/
-// Your solution for 00-sayHello (example) here:
+// sayHello() //=> Hello!
+// -----------------------------------------------------------------------------*/
+// // Your solution for 00-sayHello (example) here:
 
 function sayHello() {
   return 'Hello!'
 }
 
-/*-----------------------------------------------------------------------------
-Challenge: 01-addOne
+// /*-----------------------------------------------------------------------------
+// Challenge: 01-addOne
 
-Difficulty: Basic
+// Difficulty: Basic
 
-Prompt:
+// Prompt:
 
-Write a function called addOne that takes a single number as an argument and returns that number plus 1.
+// Write a function called addOne that takes a single number as an argument and returns that number plus 1.
 
-Examples:
+// Examples:
 
-addOne(1) //=> 2
-addOne(-5) //=> -4
------------------------------------------------------------------------------*/
-// Your solution for 01-addOne here:
+// addOne(1) //=> 2
+// addOne(-5) //=> -4
+// -----------------------------------------------------------------------------*/
+// // Your solution for 01-addOne here:
 
 
 function addOne(num) {
@@ -91,6 +91,9 @@ sumNumbers([]) //=> 0
 // Your solution for 03-sumNumbers here:
 
 
+// let sumNumbers = []
+
+// sumNumbers.reduce( (previousValue, currentValue) => previousValue + currentValue)
 
 
 
@@ -180,7 +183,10 @@ reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES"
 // Your solution for 07-reverseUpcaseString here:
 
 
-
+function reverseUpcaseString(str) {
+  splitString = str.split('').reverse().join("").toUpperCase()
+  return (splitString)
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -200,8 +206,15 @@ removeEnds('a'); //=> "" (empty string)
 -----------------------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
 
-
-
+function removeEnds(str) {
+  splitString = str.split("")
+  // console.log(splitString)
+  if (splitString.length <= 2) {
+    return('')
+  } else {
+    return(str.substring(1, str.length - 1))
+  }
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -223,7 +236,12 @@ charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i:
 -----------------------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
-
+function charCount(str) {
+  return str.split('').reduce((count, char) => {
+    count[char] ? count[char]++ : count[char] = 1;
+    return count;
+  }, {})
+}
 
 
 
