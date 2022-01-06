@@ -91,12 +91,13 @@ sumNumbers([]) //=> 0
 // Your solution for 03-sumNumbers here:
 
 
-// let sumNumbers = []
-
-// sumNumbers.reduce( (previousValue, currentValue) => previousValue + currentValue)
-
-
-
+function sumNumbers(arr) {
+  let acum = 0
+  for(let i = 0; i < arr.length; i++) {
+    acum += arr[i]
+  }
+  return (acum)
+}
 /*-----------------------------------------------------------------------------
 Challenge: 04-addList
 
@@ -116,7 +117,13 @@ add(7,-12) //=> -5
 -----------------------------------------------------------------------------*/
 // Your solution for 04-addList here:
 
-
+function addList(){
+  let acum = 0
+  for(let i = 0; i < arguments.length; i++) {
+    acum += arguments[i]
+  }
+  return (acum)
+}
 
 
 
@@ -140,8 +147,14 @@ computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
 
-
-
+const computeRemainder = (num1, num2) => {
+  let remainder =  num1 % num2
+  if (num2 == 0) {
+    return (Infinity)
+  } else {
+    return remainder
+  }
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -164,7 +177,19 @@ range(5,2) //=> "First argument must be less than second"
 // Your solution for 06-range here:
 
 
-
+const range = (num1, num2) => {
+  let rangeArray = []
+  if(num1 < num2){
+    for(let i = num1; i < num2; i++) {
+      rangeArray.push(i)
+    } 
+  } else if (num1 === num2){
+    return rangeArray
+  } else {
+    return "First argument must be less than second"
+  } 
+  return rangeArray
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -208,7 +233,6 @@ removeEnds('a'); //=> "" (empty string)
 
 function removeEnds(str) {
   splitString = str.split("")
-  // console.log(splitString)
   if (splitString.length <= 2) {
     return('')
   } else {
@@ -292,8 +316,15 @@ isPalindrome(''); //=> true
 -----------------------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
 
-
-
+function isPalindrome(str){
+  let original = str.replace(/\s+/g, '').toLowerCase()
+  let reversedStr = str.replace(/\s+/g, '').toLowerCase().split('').reverse().join('')
+  if (reversedStr === original) {
+    return (true)
+  } else {
+    return (false)
+  }
+}
 
 
 /*-----------------------------------------------------------------------------
