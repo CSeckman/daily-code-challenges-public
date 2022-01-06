@@ -58,7 +58,7 @@ addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------------------*/
 // Your solution for 02-addTwoNumbers here:
 
-function addTwoNumbers(num1, num2) {
+const addTwoNumbers = (num1, num2) => {
   //return the sum of the two numbers
   //return nan if either is not a number
   if (typeof num1 !== 'number' || typeof num2 !== 'number') {
@@ -91,7 +91,7 @@ sumNumbers([]) //=> 0
 // Your solution for 03-sumNumbers here:
 
 
-function sumNumbers(arr) {
+const sumNumbers = (arr) => {
   let acum = 0
   for(let i = 0; i < arr.length; i++) {
     acum += arr[i]
@@ -117,7 +117,7 @@ add(7,-12) //=> -5
 -----------------------------------------------------------------------------*/
 // Your solution for 04-addList here:
 
-function addList(){
+function addList() {
   let acum = 0
   for(let i = 0; i < arguments.length; i++) {
     acum += arguments[i]
@@ -208,7 +208,7 @@ reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES"
 // Your solution for 07-reverseUpcaseString here:
 
 
-function reverseUpcaseString(str) {
+const reverseUpcaseString = (str) => {
   splitString = str.split('').reverse().join("").toUpperCase()
   return (splitString)
 }
@@ -231,7 +231,7 @@ removeEnds('a'); //=> "" (empty string)
 -----------------------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
 
-function removeEnds(str) {
+const removeEnds = (str) => {
   splitString = str.split("")
   if (splitString.length <= 2) {
     return('')
@@ -260,7 +260,7 @@ charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i:
 -----------------------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
-function charCount(str) {
+const charCount = (str) => {
   return str.split('').reduce((count, char) => {
     count[char] ? count[char]++ : count[char] = 1;
     return count;
@@ -291,8 +291,9 @@ formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
 
-
-
+const formatWithPadding = (arg1, arg2, arg3) => {
+  return (arg1.toFixed(0).padStart(arg3, arg2))
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -316,7 +317,7 @@ isPalindrome(''); //=> true
 -----------------------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
 
-function isPalindrome(str){
+const isPalindrome = (str) => {
   let original = str.replace(/\s+/g, '').toLowerCase()
   let reversedStr = str.replace(/\s+/g, '').toLowerCase().split('').reverse().join('')
   if (reversedStr === original) {
@@ -349,8 +350,17 @@ hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
 
-
-
+const hammingDistance = (str1, str2) => {
+  if (str1.length !== str2.length) {
+    return (NaN)
+  } else {
+    let distance = 0
+    for (let i = 0; i <str1.length; i++ ) {
+      str1[i] !== str2[i] ? distance += 1 : distance
+    }
+    return(distance)
+  }
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -372,6 +382,14 @@ mumble('121'); //=> '1-22-111'
 mumble('!A 2'); //=> '!-AA-   -2222'
 -----------------------------------------------------------------------------*/
 // Your solution for 13-mumble here:
+
+const mumble = (str) => {
+  let arr = str.split('')
+  for (let i=0; i < arr.length; i++) {
+    arr[i] = arr[i].repeat(i + 1)
+  }
+  return(arr.join("-"))
+}
 
 
 
