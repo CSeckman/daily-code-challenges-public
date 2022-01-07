@@ -685,8 +685,18 @@ intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 -----------------------------------------------------------------------------*/
 // Your solution for 22-intersection here:
 
-
-
+function intersection(arr1, arr2){
+  let result = []
+  for(i=0; i<arr1.length; i++){
+    let value = arr1[i]
+    if (arr2.includes(value)){
+      result.push(value)
+      let indexToRemove = arr2.findIndex((el) => el === value)
+      arr2.splice(indexToRemove, 1)
+    }
+  }
+  return result
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -711,17 +721,7 @@ balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here
 function balancedBrackets(str){
-  if (str.length % 2) return false;
-  let stack = [];
-  for (let i = 0; i < str.length; i++) {
-    var b = str.charAt(i);
-    if ( '([{'.includes(b) ) {
-      stack.push(b);
-    } else {
-      if (!'() {} []'.includes(stack.pop() + b)) return false;
-    }
-  }
-  return true;
+  
 }
 
 
