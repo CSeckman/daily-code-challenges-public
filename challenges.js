@@ -601,7 +601,7 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 
 function flatten(arr) {
   let length = arr.length
-  let flattened = arr.flat(5)
+  let flattened = arr.flat(length)
   return(flattened)
 }
 
@@ -660,7 +660,34 @@ primeFactors(200) //=> [2, 2, 2, 5, 5]
 -----------------------------------------------------------------------------*/
 // Your solution for 21-primeFactors here:
 
-
+function primeFactors(n) {
+  let factors = []
+  if (n < 2 || !Number.isInteger(n)) return factors
+  function isPrime(n) {
+    if (n < 2 || !Number.isInteger(n)){
+      return false
+    } 
+    for (i = 2; i <= n / 2; i++) {
+      if (Number.isInteger(n / i)){
+        return false
+      } 
+    }
+    return true
+  }
+  
+  let prime = 2
+  while (!isPrime(n)) {
+    if (Number.isInteger(n / prime)) {
+      factors.push(prime)
+      n = n / prime
+    } else {
+      prime++
+      while (!isPrime(prime)) prime++
+    }
+  }
+  factors.push(n)
+  return factors
+}
 
 
 
@@ -720,10 +747,30 @@ balancedBrackets( '[(])' ) // => false
 balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here
-function balancedBrackets(str){
-  
-}
 
+// if ( => {[() not }]
+
+
+function balancedBrackets(str){
+  for(let i = 0;i<str.length; i++){
+    if(str[i] === '('){
+      if(str[i+1] === '}' || str[i+1] === ']'){
+        return false
+      }
+    }
+    if(str[i] === '{'){
+      if(str[i+1] === ')' || str[i+1] === ']'){
+        return false
+      }
+    }
+    if(str[i] === '['){
+      if(str[i+1] === '}' || str[i+1] === ')'){
+        return false
+      }
+    }
+  }
+  return true
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -829,7 +876,23 @@ toCamelCase( 'A_b_c' ) // => 'ABC'
 -----------------------------------------------------------------------------*/
 // Your solution for 26-toCamelCase here:
 
+function toCamelCase(str) {
+  return str.replace(/[_-]\w/g, function(match) {
+    return match.charAt(1).toUpperCase()
+  })
+}
 
+// function toCamelCase(str){
+//   let underString = str.replace('-', '_')
+//   splitArr[0] = splitArr[0].toLowerCase()
+//   let splitArr = underString.split('_')
+//   for(i=1;i<splitArr.length; i++){
+//     splitArr[i] = splitArr[i].charAt(0).toUpperCase() + splitArr[i].slice(1)
+//   }
+//   return splitArr.join('')
+// }
+
+// toCamelCase( 'Banana-turkey_potato' )
 
 /*-----------------------------------------------------------------------------
 Challenge: 27-countTheBits
@@ -891,8 +954,21 @@ gridTrip( [100, -22], 'L2L15D50U1D9') //=> [83, -80]
 // Your solution for 28-gridTrip here:
 
 
-function gridTrip(arr, str){
-  
+function gridTrip(xyArr, moves) {
+  let result = [xyArr[0], xyArr[1]]
+  const lookup = {'R': [0, 1], 'U': [1, 1], 'L': [0, -1], 'D': [1, -1]}
+  let idx = 0
+  while (idx < moves.length) {
+    let dir = moves[idx]
+    idx++
+    let numString = ''
+    while ('0123456789'.includes(moves[idx]) && idx < moves.length) {
+      numString += moves[idx]
+      idx++
+    }
+    result[lookup[dir][0]] += numString * lookup[dir][1]
+  }
+  return result
 }
 
 
@@ -966,4 +1042,15 @@ totalTaskTime( [5, 2, 6, 8, 7, 2], 3 ) // => 12
 -----------------------------------------------------------------------------*/
 // Your solution for 30- here:
 
+function totalTaskTime(tasks, numThreads) {
+  let time = 0, shortest, threads
+  while(tasks.length > numThreads) {
+    threads = tasks.splice(0, numThreads)
+    shortest = Math.min(...threads)
+    time += shortest
+    threads = threads.map(t => t - shortest).filter(t => t)
+    tasks = threads.concat(tasks)
+  }
+  return time + (tasks.length ? Math.max(...tasks) : 0)
+}
 
