@@ -413,7 +413,10 @@ fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sal
 -----------------------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
 
-
+function fromPairs(arr){
+  let object = Object.fromEntries(arr)
+  return object
+}
 
 
 
@@ -436,8 +439,9 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44}); //=> {a: 1, b: 22, c: 
 // Your solution for 15-mergeObjects here:
 
 
-
-
+function mergeObjects(objectOne, ...objects) {
+    return Object.assign(objectOne, ...objects);
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 16-findHighestPriced
@@ -473,8 +477,19 @@ findHighestPriced([
 -----------------------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
 
+function isHighest(item, highestPrice) {
+  return item.name === highestPrice
+}
 
-
+function findHighestPriced(arr) {
+  let highestPrice = 0 
+  for (i=0; i<arr.length; i++){
+    let price = arr[i].price
+    price > highestPrice ? highestPrice = price : highestPrice
+  }
+  let obj = arr.find(item => item.price === highestPrice)
+  return(obj)
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -505,8 +520,13 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 -----------------------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
 
-
-
+function mapArray(arr, callback) {
+  var newArray = []
+  arr.forEach(function(el, i) {
+    newArray.push( callback(el, i) )
+  })
+  return newArray;
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -543,8 +563,12 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 -----------------------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
 
-
-
+function reduceArray(arr, cb, acc) {
+  for (i=0; i<arr.length; i++){
+    acc = cb(acc, arr[i], i)
+  }
+  return acc
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -575,7 +599,11 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 // Your solution for 19-flatten here:
 
 
-
+function flatten(arr) {
+  let length = arr.length
+  let flattened = arr.flat(5)
+  return(flattened)
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -599,7 +627,13 @@ isPrime(200) //=> false
 // Your solution for 20-isPrime here:
 
 
-
+function isPrime(n) {
+  if (n < 2 || !Number.isInteger(n)) return false
+  for (i = 2; i <= n / 2; i++) {
+    if (Number.isInteger(n / i)) return false
+  }
+  return true
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -675,9 +709,20 @@ balancedBrackets( '[{}]' ) // => true
 balancedBrackets( '[(])' ) // => false
 balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------------------*/
-// Your solution for 23-balancedBrackets here:
-
-
+// Your solution for 23-balancedBrackets here
+function balancedBrackets(str){
+  if (str.length % 2) return false;
+  let stack = [];
+  for (let i = 0; i < str.length; i++) {
+    var b = str.charAt(i);
+    if ( '([{'.includes(b) ) {
+      stack.push(b);
+    } else {
+      if (!'() {} []'.includes(stack.pop() + b)) return false;
+    }
+  }
+  return true;
+}
 
 
 
@@ -707,6 +752,19 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 -----------------------------------------------------------------------------*/
 // Your solution for 24-isWinningTicket here:
 
+function isWinningTicket(arr){
+  let winner = true
+  for(i=0; i<arr.length; i++) {
+    let charCode = String.fromCharCode(arr[i][1])
+    if (!arr[i][0].includes(charCode)) {
+      winner = false
+      break
+    } else {
+      winner = true
+    }
+  }
+  return winner
+}
 
 
 
@@ -737,10 +795,15 @@ getNumForIP( '10.0.0.1' ) // => 167772161
 -----------------------------------------------------------------------------*/
 // Your solution for 25-getNumForIP here:
 
-
-
-
-
+function getNumForIP(str) {
+  let accum = 0
+  let splitArr = str.split('.').reverse()
+  splitArr.forEach(function(el, idx) {
+    accum += parseInt(el) * 256**idx;
+  })
+  return accum
+}
+getNumForIP( '192.156.99.15' )
 /*-----------------------------------------------------------------------------
 Challenge: 26-toCamelCase
 
@@ -765,8 +828,6 @@ toCamelCase( 'Mama-mia' ) // => 'MamaMia'
 toCamelCase( 'A_b_c' ) // => 'ABC'
 -----------------------------------------------------------------------------*/
 // Your solution for 26-toCamelCase here:
-
-
 
 
 
@@ -796,8 +857,12 @@ countTheBits( 65535 ) //=> 16
 -----------------------------------------------------------------------------*/
 // Your solution for 27-countTheBits here:
 
-
-
+function countTheBits(num){
+  let binary = num.toString(2)
+  let split = binary.split('')
+  let filtered = split.filter((num)=> num === "1")
+  return filtered.length
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -825,6 +890,10 @@ gridTrip( [100, -22], 'L2L15D50U1D9') //=> [83, -80]
 -----------------------------------------------------------------------------*/
 // Your solution for 28-gridTrip here:
 
+
+function gridTrip(arr, str){
+  
+}
 
 
 
@@ -855,7 +924,17 @@ addChecker( [10, 15, 16, 22], 19 ) // => false
 -----------------------------------------------------------------------------*/
 // Your solution for 29-addChecker here:
 
-
+function addChecker(arr, num) {
+  let difference = 0
+  for (i=0; i<arr.length; i++) {
+    difference = num - arr[i]
+    if (arr.includes(difference)) {
+      return(true)
+      break
+    }
+  }
+  return(false)
+}
 
 
 
