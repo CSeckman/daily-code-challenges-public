@@ -752,26 +752,51 @@ balancedBrackets( '[({}[])]' ) // => true
 
 
 function balancedBrackets(str){
+  let p = 0
+  let c = 0 
+  let s = 0
   for(let i = 0;i<str.length; i++){
     if(str[i] === '('){
+      p += 1
       if(str[i+1] === '}' || str[i+1] === ']'){
         return false
       }
     }
     if(str[i] === '{'){
+      c += 1
       if(str[i+1] === ')' || str[i+1] === ']'){
         return false
-      }
+      } 
     }
     if(str[i] === '['){
+      s += 1
       if(str[i+1] === '}' || str[i+1] === ')'){
         return false
       }
     }
+    if(str[i] === ')'){
+      p -= 1
+    }
+    if(str[i] === '}'){
+      c -= 1
+    }
+    if(str[i] === ']'){
+      s -= 1
+    }
   }
-  return true
+  if (p + s + c === 0) {
+    return true
+  } else {
+    return false 
+  }
 }
 
+console.log(balancedBrackets( '()' ))
+console.log(balancedBrackets( '(]' ) )
+console.log(balancedBrackets( '[{}]' ))
+console.log(balancedBrackets( '[(])' ) )
+console.log(balancedBrackets( '[({}[])]' ))
+console.log(balancedBrackets( '[(){}[])}' ))
 
 /*-----------------------------------------------------------------------------
 Challenge: 24-isWinningTicket
